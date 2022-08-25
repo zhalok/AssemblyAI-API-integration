@@ -16,7 +16,7 @@ const upload = multer({
     },
   }),
 });
-router.post("/notification", recording_controller.get_notification);
+router.post("/webhook", recording_controller.transcribe_notification);
 router.post(
   "/upload",
   upload.single("recording"),
