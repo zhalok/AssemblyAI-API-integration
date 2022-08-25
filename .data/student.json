@@ -1,0 +1,20 @@
+[
+  {
+    "student_id": "891cfa75-4d03-44fb-96c8-3738f738497f",
+    "student_name": "Zhalok Rahman",
+    "student_email": "rahmanzhalok@gmail.com",
+    "student_password": "03041959"
+  },
+  {
+    "student_id": "cdf3e5b4-930c-4dad-b3ca-bc30803e24b2",
+    "student_name": "Riddhiman Debnath",
+    "student_email": "riswn5037@gmail.com",
+    "student_password": "03041959"
+  },
+  {
+    "student_id": "a1dfb778-c348-4b35-8442-ecebb32fa00b",
+    "student_name": "Nahian Tondra",
+    "student_email": "tondranahian@gmail.com",
+    "student_password": "03041959"
+  }
+]
