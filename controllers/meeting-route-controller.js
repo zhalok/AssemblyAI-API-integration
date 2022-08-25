@@ -8,12 +8,8 @@ const meeting_route_controller = {};
 meeting_route_controller.create_meeting = async (req, res, next) => {
   const token = get_token();
 
-  // const { agenda, teacher_email, topic, } = req.body;
-  const agenda = "Online class";
-  const teacher_email = "zhalokrahman007@gmail.com";
-  const topic = "Vector analysis";
-  const course_id = "CODING101";
-  const classroom_id = "9d41fff1-6a13-4e3b-9d49-083b28f54de3";
+  const { agenda, teacher_email, topic, classroom_id, course_id } = req.body;
+
   const zoom_req_body = {
     agenda,
     default_password: false,
@@ -36,7 +32,7 @@ meeting_route_controller.create_meeting = async (req, res, next) => {
     topic,
   };
   try {
-    const res = await fetch("https://api.zoom.us/v2/users/me/meetings", {
+    const response = await fetch("https://api.zoom.us/v2/users/me/meetings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,12 +40,14 @@ meeting_route_controller.create_meeting = async (req, res, next) => {
       },
       body: JSON.stringify(zoom_req_body),
     });
-    const data = await res.json();
+    const data = await response.json();
+    res.json(data);
     console.log(data);
     const meeting_data = {
       class_id: uuid4(),
       class_name: agenda,
       class_title: topic,
+      classroom_id,
       course_id,
       teacher_id: uuid4(),
       meeting_uuid: data.uuid,
@@ -87,7 +85,7 @@ meeting_route_controller.create_meeting = async (req, res, next) => {
         .readFileSync("/home/zhalok/Desktop/nodejs-zoomapi/.data/student.json")
         .toString()
     );
-    // console.log(students);
+    console.log(students);
     for (let i = 0; i < class_rooms.length; i++) {
       if (class_rooms[i].classroom_id == classroom_id) {
         for (let j = 0; j < class_rooms[i].students.length; j++) {
@@ -105,10 +103,11 @@ meeting_route_controller.create_meeting = async (req, res, next) => {
         }
       }
     }
+
     console.log("All the students are notified");
   } catch (e) {
     console.log(e);
   }
 };
 
-meeting_route_controller.create_meeting();
+module.exports = meeting_route_controller;
