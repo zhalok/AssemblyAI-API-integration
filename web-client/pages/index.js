@@ -9,6 +9,7 @@ export default function Home() {
   const uploadFile = () => {
     const formData = new FormData();
     formData.append("recording", file);
+    formData.append("class_id", "1234");
     axios
       .post("http://localhost:5000/recordings/upload", formData)
       .then((res) => {
